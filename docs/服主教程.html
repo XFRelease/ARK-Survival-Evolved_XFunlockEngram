@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一键解锁 服主教程</title>
+<style>
+/* ============================================================
+   样式区：禁止修改！
+   本模板是 xiangmujiaocheng 技能的「服主教程」专属模板（清爽文档蓝）。
+   修改此区会破坏所有项目服主教程的视觉统一。
+   ============================================================ */
+:root{--acc:#2563eb;--accbg:#eff6ff;--line:#e2e8f0;--line2:#cbd5e1;--text:#1e293b;--dim:#64748b;--bg2:#f8fafc;--ok:#16a34a;--warn:#d97706;--warnbg:#fffbeb;--warnline:#fde68a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15.5px/1.85 "Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;color:var(--text);background:#fff}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+code{background:var(--accbg);color:#1d4ed8;border-radius:4px;padding:1px 7px;font-family:Consolas,"Courier New",monospace;font-size:13.5px}
+pre{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:13px 16px;overflow:auto}
+pre code{background:none;color:#0f172a;padding:0}
+.hide{display:none!important}
+
+.hero{background:linear-gradient(180deg,#eef5ff 0%,#ffffff 100%);border-bottom:1px solid var(--line);padding:36px 20px 26px}
+.hero-in{max-width:1180px;margin:0 auto}
+.kind{display:inline-block;background:var(--acc);color:#fff;border-radius:4px;font-size:13px;padding:2px 12px;letter-spacing:2px}
+.hero h1{margin:12px 0 6px;font-size:30px}
+.hero h1 .accent{color:var(--acc)}
+.hero .sub{color:var(--dim);margin:0;font-size:15px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 3px rgba(15,23,42,.05)}
+.toolbar-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 20px}
+#searchInput{flex:1 1 240px;border:1px solid var(--line2);border-radius:8px;padding:8px 14px;font-size:14.5px;outline:none;background:var(--bg2)}
+#searchInput:focus{border-color:var(--acc);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line2);background:#fff;color:var(--dim);border-radius:999px;padding:5px 15px;font-size:13.5px;cursor:pointer}
+.chip:hover{border-color:var(--acc);color:var(--acc)}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.count{color:var(--dim);font-size:13px;white-space:nowrap}
+
+.layout{max-width:1180px;margin:0 auto;padding:26px 20px 70px;display:flex;gap:36px;align-items:flex-start}
+.toc{flex:0 0 215px;position:sticky;top:66px}
+.toc-title{font-size:12.5px;color:var(--dim);letter-spacing:3px;margin-bottom:8px;padding-left:10px}
+.toc a{display:block;color:var(--dim);padding:6px 10px;border-left:2px solid var(--line);font-size:14px}
+.toc a:hover{color:var(--acc);border-left-color:var(--acc);background:var(--accbg);text-decoration:none}
+.toc a.dim{opacity:.35}
+.content{flex:1 1 500px;min-width:320px}
+
+.unit{margin:0 0 38px}
+.group{font-size:12.5px;color:var(--acc);letter-spacing:2px;margin-bottom:4px}
+.unit>h2{margin:0 0 10px;font-size:22px;border-left:4px solid var(--acc);padding-left:12px}
+.lead{color:var(--dim);margin:0 0 14px;font-size:14.5px}
+.unit h3{font-size:16.5px;margin:20px 0 8px}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:13px;margin:16px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:15px 17px;box-shadow:0 1px 2px rgba(15,23,42,.04);transition:.15s}
+.card:hover{border-color:var(--acc);box-shadow:0 4px 14px rgba(37,99,235,.12)}
+.card .icon{font-size:22px}
+.card h4{margin:7px 0 5px;font-size:15.5px;color:var(--acc)}
+.card p{margin:0;color:var(--dim);font-size:13.5px}
+
+ol.steps{list-style:none;counter-reset:st;padding:0;margin:8px 0 0}
+ol.steps>li{counter-increment:st;position:relative;padding:0 0 20px 48px}
+ol.steps>li::before{content:counter(st);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--acc);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+ol.steps>li::after{content:"";position:absolute;left:14px;top:36px;bottom:4px;width:2px;background:var(--line)}
+ol.steps>li:last-child{padding-bottom:2px}
+ol.steps>li:last-child::after{display:none}
+.step-title{display:block;font-weight:700;margin-bottom:3px}
+ol.steps p{margin:0}
+
+.note,.warning{border-radius:8px;padding:12px 16px;margin:14px 0;font-size:14.5px}
+.note{background:var(--accbg);border:1px solid #bfdbfe}
+.warning{background:var(--warnbg);border:1px solid var(--warnline)}
+
+table.data-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px}
+.data-table th{background:var(--accbg);color:#1d4ed8;text-align:left}
+.data-table th,.data-table td{border:1px solid var(--line);padding:8px 13px}
+.data-table tr:nth-child(even) td{background:#fbfdff}
+.data-table td code{white-space:nowrap}
+
+details.faq{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin:9px 0}
+details.faq summary{cursor:pointer;font-weight:600}
+details.faq[open]{border-color:var(--acc)}
+details.faq .answer{color:var(--dim);padding-top:7px}
+
+.shot{border:2px dashed var(--line2);border-radius:8px;padding:26px;text-align:center;color:var(--dim);font-size:14px;margin:13px 0}
+.badge{display:inline-block;border-radius:4px;padding:1px 10px;font-size:12.5px;margin-right:6px;color:var(--acc);border:1px solid var(--acc)}
+.badge.ok{color:var(--ok);border-color:var(--ok)}
+.badge.warn{color:var(--warn);border-color:var(--warn)}
+.empty{border:1px dashed var(--line2);border-radius:10px;padding:44px;text-align:center;color:var(--dim);margin:20px 0}
+
+.foot{border-top:1px solid var(--line);color:var(--dim);text-align:center;padding:20px;font-size:13px;background:var(--bg2)}
+@media (max-width:820px){.toc{display:none}.layout{padding-top:18px}.hero h1{font-size:24px}}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="hero-in">
+  <span class="kind">服主教程</span>
+  <h1>一键解锁 <span class="accent">配置与部署指南</span></h1>
+  <p class="sub">面向服主：安装部署、全部配置项详解、命令用法与疑难排查（插件 XFunlockEngram v1.0）</p>
+</div></header>
+
+<div class="toolbar"><div class="toolbar-in">
+  <input id="searchInput" type="search" placeholder="搜索配置项、命令、问题…">
+  <div class="chips">
+    <button class="chip on" data-cat="all">全部</button>
+    <button class="chip" data-cat="deploy">部署</button>
+    <button class="chip" data-cat="basic">基础配置</button>
+    <button class="chip" data-cat="cmd">命令详解</button>
+    <button class="chip" data-cat="faq">疑难解答</button>
+  </div>
+  <span class="count" id="resultCount"></span>
+</div></div>
+
+<div class="layout">
+<nav class="toc">
+  <div class="toc-title">目录</div>
+  <a href="#u1">软件总览</a>
+  <a href="#u2">环境要求</a>
+  <a href="#u3">部署安装</a>
+  <a href="#u4">配置文件说明</a>
+  <a href="#u5">配置总表</a>
+  <a href="#u6">ConsoleEncoding 控制台编码</a>
+  <a href="#u7">ChatCommand 命令改名</a>
+  <a href="#u8">UnlockEngram 印痕分组开关</a>
+  <a href="#u8b">Notification 通知气泡</a>
+  <a href="#u9">命令总表与改名</a>
+  <a href="#u10">/一键解锁（玩家）</a>
+  <a href="#u11">/XFunlockEngramReload（管理员）</a>
+  <a href="#u12">XFunlockEngram.Reload（控制台/RCON）</a>
+  <a href="#u13">常见问题</a>
+  <a href="#u14">技术支持</a>
+</nav>
+
+<main class="content">
+
+<section class="unit" id="u1" data-cat="basic">
+  <div class="group">第一章 · 软件总览</div>
+  <h2>软件总览</h2>
+  <p class="lead">「一键解锁」是方舟生存进化（ARK: Survival Evolved）服务端插件：玩家在聊天框输入一条命令，即可学会服务器开放分组内的全部印痕，开放范围由你在配置里按分组精确控制。</p>
+  <div class="card-grid">
+    <div class="unit card" data-cat="basic"><div class="icon">🗝️</div><h4>一键解锁印痕</h4><p>玩家一条聊天命令，配置开启分组内的印痕全部点亮，完成后屏幕显示本次解锁数量。</p></div>
+    <div class="unit card" data-cat="basic"><div class="icon">🗂️</div><h4>九大分组开关</h4><p>按孤岛、焦土、畸变、灭绝、创世、泰克等分组逐个控制开放范围，默认开启 7 组。</p></div>
+    <div class="unit card" data-cat="cmd"><div class="icon">✏️</div><h4>命令随心改名</h4><p>两个聊天命令的文本都在配置里自定义，换服务器风格不用改代码。</p></div>
+    <div class="unit card" data-cat="cmd"><div class="icon">🔄</div><h4>三通道热重载</h4><p>聊天、控制台、RCON 三条途径重载配置，分组开关、通知气泡与控制台编码改完即生效。</p></div>
+    <div class="unit card" data-cat="basic"><div class="icon">🖥️</div><h4>控制台编码自适应</h4><p>ArkApi 3.54（GBK）与 3.55（UTF-8）服务器的中文日志均不乱码，默认自动探测。</p></div>
+    <div class="unit card" data-cat="deploy"><div class="icon">🪶</div><h4>轻量零依赖</h4><p>无数据库、无授权验证、无额外运行库，三个文件放进插件目录即可使用。</p></div>
+  </div>
+</section>
+
+<section class="unit" id="u2" data-cat="deploy">
+  <div class="group">第二章 · 环境要求</div>
+  <h2>环境要求</h2>
+  <table class="data-table">
+    <tr><th style="width:160px">项目</th><th>要求</th></tr>
+    <tr><td>操作系统</td><td>Windows x64（方舟服务端本身即为 Win64 程序）</td></tr>
+    <tr><td>游戏服务端</td><td>ARK: Survival Evolved 专用服务器，且已安装 ArkApi</td></tr>
+    <tr><td>运行依赖</td><td>ArkApi 3.5 及以上（在 3.54 与 3.55 上验证通过；插件信息文件标注 <code>MinApiVersion 3.5</code>）。无数据库需求、无其他运行库依赖</td></tr>
+    <tr><td>部署位置</td><td><code>ShooterGame\Binaries\Win64\ArkApi\Plugins\XFunlockEngram\</code></td></tr>
+    <tr><td>文件清单</td><td><code>XFunlockEngram.dll</code>、<code>PluginInfo.json</code>、<code>config.json</code>（三个文件缺一不可，见部署章节）</td></tr>
+  </table>
+</section>
+
+<section class="unit" id="u3" data-cat="deploy">
+  <div class="group">第三章 · 部署安装</div>
+  <h2>部署安装</h2>
+  <ol class="steps">
+    <li><span class="step-title">确认服务器已安装 ArkApi</span><p>服务器能通过 ArkApi 加载其他插件即已安装；从未安装过请先完成 ArkApi 部署 → 再进行下一步。</p></li>
+    <li><span class="step-title">关闭服务器</span><p>停止方舟服务器进程 → 确认控制台已退出 → 下一步复制文件。</p></li>
+    <li><span class="step-title">复制插件文件</span><p>把 <code>XFunlockEngram.dll</code>、<code>PluginInfo.json</code>、<code>config.json</code> 三个文件复制到 <code>&lt;服务器目录&gt;\ShooterGame\Binaries\Win64\ArkApi\Plugins\XFunlockEngram\</code> → 目录不存在时手动新建，目录名必须为 <code>XFunlockEngram</code> → 复制完成进入下一步。</p></li>
+    <li><span class="step-title">按需修改配置</span><p>用文本编辑器打开目录里的 <code>config.json</code> → 按第四、五章说明调整分组开关与命令文本 → 保存为 UTF-8 编码。</p></li>
+    <li><span class="step-title">启动服务器</span><p>启动方舟服务器 → 控制台出现横幅「先锋.一键解锁(1.0) 先锋方舟服主群:138535385 作者QQ:711919」→ 说明插件加载成功。</p></li>
+    <li><span class="step-title">进服验证</span><p>进入游戏在聊天框输入 <code>/一键解锁</code> → 屏幕中央出现青色通知「一键解锁完成, 本次解锁: N 个印痕」→ 部署完成。</p></li>
+  </ol>
+  <div class="warning"><code>config.json</code> 必须与 DLL 放在同一目录且格式正确：文件缺失或 JSON 语法错误都会导致插件加载失败（控制台报 <code>Can't open config.json</code> 或解析错误）。插件不会自动生成配置文件，请随包部署。</div>
+</section>
+
+<section class="unit" id="u4" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>配置文件说明</h2>
+  <p>所有配置集中在一个文件：<code>&lt;服务器目录&gt;\ShooterGame\Binaries\Win64\ArkApi\Plugins\XFunlockEngram\config.json</code>。完整结构如下：</p>
+  <pre><code>{
+  "ConsoleEncoding": "auto",
+  "ChatCommand": {
+    "PlayerCommands": {
+      "UnlockEngrams": "/一键解锁"
+    },
+    "AdminCommands": {
+      "UpdateSettings": "/XFunlockEngramReload"
+    }
+  },
+  "Notification": {
+    "UnlockComplete": {
+      "Text": "一键解锁完成, 本次解锁: {} 个印痕",
+      "Scale": 2.0,
+      "Time": 5,
+      "Color": "0,255,255,100"
+    }
+  },
+  "UnlockEngram": {
+    "ARK_PRIME": true,
+    "ARK_SCORCHEDEARTH": true,
+    "ARK_TEK": false,
+    "ARK_UNLEARNED": false,
+    "ARK_ABERRATION": true,
+    "ARK_EXTINCTION": true,
+    "ARK_GENESIS": true,
+    "ARK_GEN2": true,
+    "ARK_AQUATICA": true
+  }
+}</code></pre>
+  <div class="note">JSON 里逗号、引号一个都不能少。建议用带 JSON 校验的编辑器（如 VS Code、Notepad++）修改；改前先备份一份能用的配置。</div>
+</section>
+
+<section class="unit" id="u5" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>配置总表</h2>
+  <p class="lead">本表列出全部配置键与兜底值，可配合页面搜索定位；详细讲法见后续各节。</p>
+  <table class="data-table">
+    <tr><th style="width:280px">配置键</th><th style="width:150px">兜底值（不配置时）</th><th>说明</th></tr>
+    <tr><td><code>ConsoleEncoding</code></td><td><code>auto</code>（自动探测）</td><td>控制台中文编码模式，可选 <code>auto</code> / <code>gbk</code> / <code>ansi</code> / <code>utf8</code> / <code>utf-8</code></td></tr>
+    <tr><td><code>ChatCommand.PlayerCommands.UnlockEngrams</code></td><td>该命令不注册</td><td>玩家「一键解锁」命令文本，默认 <code>/一键解锁</code></td></tr>
+    <tr><td><code>ChatCommand.AdminCommands.UpdateSettings</code></td><td>该命令不注册</td><td>管理员「重载配置」命令文本，默认 <code>/XFunlockEngramReload</code></td></tr>
+    <tr><td><code>Notification.UnlockComplete.Text</code></td><td><code>一键解锁完成, 本次解锁: {} 个印痕</code></td><td>解锁完成气泡的文案，<code>{}</code> 会被替换为本次解锁数量</td></tr>
+    <tr><td><code>Notification.UnlockComplete.Scale</code></td><td><code>2.0</code></td><td>气泡文字大小（下限 0.1）</td></tr>
+    <tr><td><code>Notification.UnlockComplete.Time</code></td><td><code>5</code></td><td>气泡显示时长，单位秒（下限 0.5）</td></tr>
+    <tr><td><code>Notification.UnlockComplete.Color</code></td><td><code>0,255,255,100</code></td><td>气泡颜色，格式 <code>"R,G,B,A"</code>（0–255）</td></tr>
+    <tr><td><code>UnlockEngram.ARK_PRIME</code></td><td><code>false</code>（视为关闭）</td><td>孤岛（主世界）印痕分组开关</td></tr>
+    <tr><td><code>UnlockEngram.ARK_SCORCHEDEARTH</code></td><td><code>false</code></td><td>焦土地图印痕分组开关</td></tr>
+    <tr><td><code>UnlockEngram.ARK_TEK</code></td><td><code>false</code></td><td>泰克科技印痕分组开关（默认关闭）</td></tr>
+    <tr><td><code>UnlockEngram.ARK_UNLEARNED</code></td><td><code>false</code></td><td>未学习类（Unlearned）印痕分组开关（默认关闭）</td></tr>
+    <tr><td><code>UnlockEngram.ARK_ABERRATION</code></td><td><code>false</code></td><td>畸变地图印痕分组开关</td></tr>
+    <tr><td><code>UnlockEngram.ARK_EXTINCTION</code></td><td><code>false</code></td><td>灭绝地图印痕分组开关</td></tr>
+    <tr><td><code>UnlockEngram.ARK_GENESIS</code></td><td><code>false</code></td><td>创世 1 印痕分组开关</td></tr>
+    <tr><td><code>UnlockEngram.ARK_GEN2</code></td><td><code>false</code></td><td>创世 2 印痕分组开关</td></tr>
+    <tr><td><code>UnlockEngram.ARK_AQUATICA</code></td><td><code>false</code></td><td>Aquatica（水世界）印痕分组开关</td></tr>
+  </table>
+  <div class="note">兜底值规则统一为「缺失、或类型不对，一律按关闭 / 不生效处理」：分组键缺失或不是布尔值 → 该分组不解锁；命令键缺失或不是字符串 → 该命令不注册（启动时控制台黄字提示）。配置不会让插件崩溃。</div>
+</section>
+
+<section class="unit" id="u6" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>ConsoleEncoding 控制台编码</h2>
+  <p><b>什么意思：</b>控制插件往服务器控制台输出中文时的编码。ArkApi 3.54 的服务器控制台是 GBK、3.55 是 UTF-8，设错会出现中文乱码。</p>
+  <p><b>兜底值：</b><span class="badge">auto</span>（未配置时的默认值，按控制台代码页自动探测；填了不认识的值或类型不对也会回落 auto，并在控制台黄字提醒）</p>
+  <pre><code>{
+  "ConsoleEncoding": "auto"
+}</code></pre>
+  <p><b>怎么修改：</b>取值大小写不敏感，可选：<code>auto</code> 自动探测（推荐，两类服务器通用）；<code>gbk</code> 或 <code>ansi</code> 强制 GBK（3.54 老版本服务器乱码时用）；<code>utf8</code> 或 <code>utf-8</code> 强制 UTF-8（3.55 服务器）。改完后执行任一重载命令即热生效，无需重启。</p>
+</section>
+
+<section class="unit" id="u7" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>ChatCommand 命令改名</h2>
+  <p><b>什么意思：</b>定义两个聊天命令的触发文本。命令文本就是玩家在聊天框输入的完整第一段（含前导 <code>/</code>），改这里等于换命令名。</p>
+  <p><b>兜底值：</b><span class="badge">缺失即不注册</span>（键缺失或不是字符串时，对应命令不注册，启动时控制台黄字提示「未配置, 跳过注册」）</p>
+  <pre><code>{
+  "ChatCommand": {
+    "PlayerCommands": {
+      "UnlockEngrams": "/一键解锁"
+    },
+    "AdminCommands": {
+      "UpdateSettings": "/XFunlockEngramReload"
+    }
+  }
+}</code></pre>
+  <p><b>怎么修改：</b>引号内改成你想要的命令文本即可，例如 <code>"/kjjs"</code>、<code>"/解锁印痕"</code>。<code>PlayerCommands</code> 下的命令所有玩家可用，<code>AdminCommands</code> 下的仅管理员可用。键名 <code>UnlockEngrams</code>、<code>UpdateSettings</code> 是插件识别用的，不要改。</p>
+  <div class="warning">命令文本只在插件加载时注册：改名后需要重启服务器才生效（分组开关等其他配置走重载命令即时生效）。命令文本必须与玩家输入完全一致，大小写敏感。</div>
+</section>
+
+<section class="unit" id="u8" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>UnlockEngram 印痕分组开关</h2>
+  <p><b>什么意思：</b>控制「一键解锁」开放哪些分组的印痕。玩家执行命令时，只有开关为 <code>true</code> 的分组里的印痕会被解锁。</p>
+  <p><b>兜底值：</b><span class="badge">缺失或非布尔 = false</span>（每组键缺失、或值不是 <code>true</code>/<code>false</code>，一律按关闭处理）</p>
+  <pre><code>{
+  "UnlockEngram": {
+    "ARK_PRIME": true,
+    "ARK_SCORCHEDEARTH": true,
+    "ARK_TEK": false,
+    "ARK_UNLEARNED": false,
+    "ARK_ABERRATION": true,
+    "ARK_EXTINCTION": true,
+    "ARK_GENESIS": true,
+    "ARK_GEN2": true,
+    "ARK_AQUATICA": true
+  }
+}</code></pre>
+  <p><b>怎么修改：</b>把要开放的分组改为 <code>true</code>，要关闭的改为 <code>false</code>，保存后执行重载命令即生效。各组含义：</p>
+  <table class="data-table">
+    <tr><th style="width:220px">分组键</th><th style="width:90px">默认值</th><th>含义与效果</th></tr>
+    <tr><td><code>ARK_PRIME</code></td><td>true</td><td>孤岛 / 主世界印痕</td></tr>
+    <tr><td><code>ARK_SCORCHEDEARTH</code></td><td>true</td><td>焦土地图印痕</td></tr>
+    <tr><td><code>ARK_TEK</code></td><td>false</td><td>泰克科技印痕（默认不随一键解锁发放）</td></tr>
+    <tr><td><code>ARK_UNLEARNED</code></td><td>false</td><td>未学习类（Unlearned）印痕（默认不发放）</td></tr>
+    <tr><td><code>ARK_ABERRATION</code></td><td>true</td><td>畸变地图印痕</td></tr>
+    <tr><td><code>ARK_EXTINCTION</code></td><td>true</td><td>灭绝地图印痕</td></tr>
+    <tr><td><code>ARK_GENESIS</code></td><td>true</td><td>创世 1 印痕</td></tr>
+    <tr><td><code>ARK_GEN2</code></td><td>true</td><td>创世 2 印痕</td></tr>
+    <tr><td><code>ARK_AQUATICA</code></td><td>true</td><td>Aquatica（水世界）印痕；游戏内该分组数值为 130，插件按此数值识别</td></tr>
+  </table>
+  <div class="note">两道安全闸门：玩家<b>已经学会</b>的印痕不会重复发放；被服务器<b>隐藏</b>的印痕（隐藏判定）永远不会被解锁——管理员隐藏的测试物品不会借此流出。</div>
+</section>
+
+<section class="unit" id="u8b" data-cat="basic">
+  <div class="group">第四章 · 配置详解</div>
+  <h2>Notification 通知气泡</h2>
+  <p><b>什么意思：</b>控制玩家执行 <code>/一键解锁</code> 后弹出的屏幕通知气泡——文案、文字大小、显示时长、颜色全部可配。配置按<b>消息键</b>分层：<code>Notification.&lt;消息键&gt;.Text / Scale / Time / Color</code>，当前唯一消息键 <code>UnlockComplete</code>（解锁完成气泡）；以后插件新增气泡会各占一个新的下级键，互不影响。</p>
+  <p><b>兜底值：</b><span class="badge">缺失 / 类型不对 = 内置默认</span>（文案为「一键解锁完成, 本次解锁: {} 个印痕」、大小 2.0、时长 5 秒、颜色 <code>0,255,255,100</code> 青色半透明；数值低于下限同样回落默认）</p>
+  <pre><code>{
+  "Notification": {
+    "UnlockComplete": {
+      "Text": "一键解锁完成, 本次解锁: {} 个印痕",
+      "Scale": 2.0,
+      "Time": 5,
+      "Color": "0,255,255,100"
+    }
+  }
+}</code></pre>
+  <p><b>怎么修改：</b></p>
+  <table class="data-table">
+    <tr><th style="width:90px">键</th><th style="width:130px">取值</th><th>说明</th></tr>
+    <tr><td><code>Text</code></td><td>任意文本</td><td>气泡文案；文本中第一个 <code>{}</code> 会被替换为本次解锁数量，不含 <code>{}</code> 则原样显示；<b>留空字符串 = 关闭该条通知</b>（玩家执行命令不再弹气泡）</td></tr>
+    <tr><td><code>Scale</code></td><td>数字，下限 0.1</td><td>文字大小，默认 2.0；想更醒目可改 3.0 等</td></tr>
+    <tr><td><code>Time</code></td><td>数字（秒），下限 0.5</td><td>显示时长，默认 5</td></tr>
+    <tr><td><code>Color</code></td><td><code>"R,G,B,A"</code> 字符串</td><td>四段 0–255 整数，容许空格；例如白色 <code>"255,255,255,100"</code>、金色 <code>"255,200,0,100"</code>；格式不对回落青色</td></tr>
+  </table>
+  <div class="note">通知配置实时读取：修改后执行重载命令即生效，无需重启。文本与颜色改动建议进服实际弹一次确认效果。</div>
+</section>
+
+<section class="unit" id="u9" data-cat="cmd">
+  <div class="group">第五章 · 命令用法详解</div>
+  <h2>命令总表与改名</h2>
+  <p class="lead">聊天命令在游戏内聊天框输入；控制台命令在服务器控制台或 RCON 输入。</p>
+  <table class="data-table">
+    <tr><th>命令（默认文本）</th><th style="width:90px">权限</th><th>作用</th><th style="width:300px">改名配置键</th></tr>
+    <tr><td><code>/一键解锁</code></td><td>玩家</td><td>解锁所有开启分组内、未隐藏且未学会的印痕</td><td><code>ChatCommand.PlayerCommands.UnlockEngrams</code></td></tr>
+    <tr><td><code>/XFunlockEngramReload</code></td><td>管理员</td><td>重新载入 config.json（分组开关、通知气泡、控制台编码即时生效）</td><td><code>ChatCommand.AdminCommands.UpdateSettings</code></td></tr>
+    <tr><td><code>XFunlockEngram.Reload</code></td><td>控制台 / RCON</td><td>重新载入 config.json（与上一条等效，控制台版）</td><td>固定命令名，不可改名</td></tr>
+  </table>
+  <div class="note">符号约定：命令格式里的 <code>[方括号]</code> 表示可选参数，只是标注——<b>实际输入时不要输入方括号</b>。本插件三条命令均无参数，下方所有示例都是可直接照抄的真实输入。</div>
+</section>
+
+<section class="unit" id="u10" data-cat="cmd">
+  <div class="group">第五章 · 命令用法详解</div>
+  <h2>/一键解锁（玩家命令）</h2>
+  <p><b>作用：</b>给执行者本人发放服务器开放分组内的全部印痕。开荒、新手教学、节日福利场景使用。</p>
+  <pre><code>/一键解锁</code></pre>
+  <table class="data-table">
+    <tr><th>参数</th><th style="width:60px">必填</th><th style="width:110px">缺省值</th><th>说明</th></tr>
+    <tr><td>（无参数）</td><td>—</td><td>—</td><td>本命令不接受任何参数</td></tr>
+  </table>
+  <p>示例：<code>/一键解锁</code>（裸命令：立即解锁所有开放分组印痕，屏幕弹出完成通知）　<code>/kjjs</code>（服主把命令改名为 <code>/kjjs</code> 后的等效输入）</p>
+  <p><b>反馈：</b>成功时屏幕中央弹出解锁完成通知气泡，默认青色、文案「一键解锁完成, 本次解锁: N 个印痕」、约 5 秒——文案、大小、时长、颜色均可配置（见 Notification 小节，留空文案可关闭）。测试版插件还会在控制台输出统计（解锁 / 隐藏 / 跳过分组 / 已解锁数量及分组明细），正式版仅保留玩家通知。玩家处于死亡、观战等没有角色实体的状态时命令无反应。解锁走服务端强制解锁方式，已学会的与被隐藏的印痕自动跳过。</p>
+</section>
+
+<section class="unit" id="u11" data-cat="cmd">
+  <div class="group">第五章 · 命令用法详解</div>
+  <h2>/XFunlockEngramReload（管理员命令）</h2>
+  <p><b>作用：</b>不重启服务器重新载入 <code>config.json</code>。改完分组开关、通知气泡、控制台编码后用它即时生效。默认命令带插件英文名前缀，避免与其他插件的重载命令撞名失灵。</p>
+  <pre><code>/XFunlockEngramReload</code></pre>
+  <table class="data-table">
+    <tr><th>参数</th><th style="width:60px">必填</th><th style="width:110px">缺省值</th><th>说明</th></tr>
+    <tr><td>（无参数）</td><td>—</td><td>—</td><td>本命令不接受任何参数</td></tr>
+  </table>
+  <p>示例：<code>/XFunlockEngramReload</code>（裸命令：重载配置并聊天回复结果）　<code>/reload</code>（服主把命令改名为 <code>/reload</code> 后的等效输入）</p>
+  <p><b>反馈：</b>仅服务器管理员可用（按管理员身份判定），非管理员执行无任何提示。成功时聊天回复「一键解锁: 配置已重新载入」；失败时聊天回复「一键解锁: 配置重载失败: 」并附具体原因（通常是 JSON 语法错误），同时控制台红字输出同一信息。注意：命令文本本身改名后需重启服务器（见第四章）。</p>
+</section>
+
+<section class="unit" id="u12" data-cat="cmd">
+  <div class="group">第五章 · 命令用法详解</div>
+  <h2>XFunlockEngram.Reload（控制台 / RCON 命令）</h2>
+  <p><b>作用：</b>与 <code>/XFunlockEngramReload</code> 等效，供不在游戏内时使用（服务器控制台、RCON 工具、管理面板）。</p>
+  <pre><code>XFunlockEngram.Reload</code></pre>
+  <table class="data-table">
+    <tr><th>参数</th><th style="width:60px">必填</th><th style="width:110px">缺省值</th><th>说明</th></tr>
+    <tr><td>（无参数）</td><td>—</td><td>—</td><td>本命令不接受任何参数</td></tr>
+  </table>
+  <p>示例：<code>XFunlockEngram.Reload</code>（在服务器控制台或 RCON 直接输入：重载配置）　<code>cheat XFunlockEngram.Reload</code>（在游戏内管理员控制台输入的等效写法）</p>
+  <p><b>反馈：</b>成功时控制台 / RCON 返回「Reloaded config」；失败时返回「Failed to reload config」并在服务器日志记录具体错误。重载同时会重新应用 <code>ConsoleEncoding</code> 编码设置。</p>
+</section>
+
+<section class="unit" id="u13" data-cat="faq">
+  <div class="group">第六章 · 常见问题</div>
+  <h2>常见问题</h2>
+  <details class="faq"><summary>玩家说输入 /一键解锁 没反应？</summary><div class="answer">按顺序排查：① 命令是否被改名（看 <code>ChatCommand.PlayerCommands.UnlockEngrams</code>）；② 启动时控制台是否有「未配置, 跳过注册」黄字——有则说明该键缺失或不是字符串；③ 玩家是否处于死亡 / 观战状态（此时静默无反应，复活后再试）。</div></details>
+  <details class="faq"><summary>改了配置为什么没生效？</summary><div class="answer">分组开关、通知气泡、控制台编码改完要执行 <code>/XFunlockEngramReload</code> 或 <code>XFunlockEngram.Reload</code> 才生效；聊天命令文本改名必须重启服务器（命令只在插件加载时注册）。</div></details>
+  <details class="faq"><summary>泰克（TEK）印痕为什么解不了？</summary><div class="answer"><code>ARK_TEK</code> 与 <code>ARK_UNLEARNED</code> 两个分组默认关闭。把对应键改为 <code>true</code>，执行重载命令后再让玩家使用命令即可。</div></details>
+  <details class="faq"><summary>/XFunlockEngramReload 提示失败怎么办？</summary><div class="answer">聊天回复里会带具体原因，绝大多数是 JSON 语法错误：多逗号、少逗号、中文引号、漏引号。用带 JSON 校验的编辑器检查后保存，再执行一次重载即可恢复。</div></details>
+  <details class="faq"><summary>控制台中文乱码？</summary><div class="answer">把 <code>ConsoleEncoding</code> 设为 <code>auto</code>（默认，自动适配 3.54 / 3.55）；仍乱码时老版本服务器强制 <code>gbk</code>、新版本强制 <code>utf8</code>，改完执行重载命令即时生效。</div></details>
+  <details class="faq"><summary>想临时停用插件？</summary><div class="answer">关闭服务器后把 <code>XFunlockEngram.dll</code> 改名为 <code>XFunlockEngram.dll.arkapi</code>（ArkApi 的停用后缀）或移出插件目录，重启服务器即不加载；恢复名字再重启即可启用。</div></details>
+</section>
+
+<section class="unit" id="u14" data-cat="faq">
+  <div class="group">第七章 · 技术支持</div>
+  <h2>技术支持</h2>
+  <div class="note">作者 QQ：711919　·　先锋方舟服主群：138535385。反馈问题时建议附上：服务器的 ArkApi 版本、插件目录下的 <code>config.json</code>、服务器控制台的相关日志（尤其黄字 / 红字提示）。</div>
+</section>
+
+<div class="empty hide" id="emptyState">没有匹配的内容，换个关键词或分类试试</div>
+</main>
+</div>
+
+<footer class="foot">
+  一键解锁（XFunlockEngram） · 服主教程 · 2026-09
+</footer>
+
+<script>
+(function(){
+var inp=document.getElementById('searchInput');
+var chips=[].slice.call(document.querySelectorAll('.chip'));
+var units=[].slice.call(document.querySelectorAll('.unit'));
+var empty=document.getElementById('emptyState');
+var cnt=document.getElementById('resultCount');
+var cat='all';
+function go(){
+  var q=(inp.value||'').trim().toLowerCase(),n=0;
+  units.forEach(function(u){
+    var okC=(cat=='all'||u.getAttribute('data-cat')==cat);
+    var t=(u.textContent||'').toLowerCase()+(u.getAttribute('data-kw')||'');
+    var okQ=!q||t.indexOf(q)>-1;
+    var s=okC&&okQ;u.classList.toggle('hide',!s);if(s)n++;
+  });
+  [].forEach.call(document.querySelectorAll('.toc a'),function(a){
+    var el=document.getElementById(a.getAttribute('href').slice(1));
+    a.classList.toggle('dim',!(el&&!el.classList.contains('hide')));
+  });
+  empty.classList.toggle('hide',n>0);
+  cnt.textContent=n+' / '+units.length+' 条';
+}
+chips.forEach(function(c){c.addEventListener('click',function(){
+  chips.forEach(function(x){x.classList.remove('on')});c.classList.add('on');
+  cat=c.getAttribute('data-cat');go();
+})});
+inp.addEventListener('input',go);go();
+})();
+</script>
+
+</body>
+</html>
