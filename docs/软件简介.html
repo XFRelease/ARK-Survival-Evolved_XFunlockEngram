@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一键解锁 软件简介</title>
+<style>
+/* ============================================================
+   样式区：禁止修改！
+   本模板是 xiangmujiaocheng 技能的「软件简介」专属模板（清爽文档蓝）。
+   修改此区会破坏所有项目软件简介的视觉统一。
+   ============================================================ */
+:root{--acc:#2563eb;--accbg:#eff6ff;--line:#e2e8f0;--line2:#cbd5e1;--text:#1e293b;--dim:#64748b;--bg2:#f8fafc;--ok:#16a34a;--warn:#d97706;--warnbg:#fffbeb;--warnline:#fde68a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15.5px/1.85 "Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;color:var(--text);background:#fff}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+code{background:var(--accbg);color:#1d4ed8;border-radius:4px;padding:1px 7px;font-family:Consolas,"Courier New",monospace;font-size:13.5px}
+pre{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:13px 16px;overflow:auto}
+pre code{background:none;color:#0f172a;padding:0}
+.hide{display:none!important}
+
+.hero{background:linear-gradient(180deg,#eef5ff 0%,#ffffff 100%);border-bottom:1px solid var(--line);padding:44px 20px 32px;text-align:center}
+.kind{display:inline-block;background:var(--acc);color:#fff;border-radius:4px;font-size:13px;padding:2px 12px;letter-spacing:2px}
+.hero h1{margin:14px 0 8px;font-size:34px}
+.hero h1 .accent{color:var(--acc)}
+.hero .sub{color:var(--dim);margin:0 auto;max-width:640px;font-size:15.5px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 3px rgba(15,23,42,.05)}
+.toolbar-in{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 20px}
+#searchInput{flex:1 1 240px;border:1px solid var(--line2);border-radius:8px;padding:8px 14px;font-size:14.5px;outline:none;background:var(--bg2)}
+#searchInput:focus{border-color:var(--acc);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line2);background:#fff;color:var(--dim);border-radius:999px;padding:5px 15px;font-size:13.5px;cursor:pointer}
+.chip:hover{border-color:var(--acc);color:var(--acc)}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.count{color:var(--dim);font-size:13px;white-space:nowrap}
+
+.content{max-width:980px;margin:0 auto;padding:30px 20px 70px}
+
+.unit{margin:0 0 38px}
+.group{font-size:12.5px;color:var(--acc);letter-spacing:2px;margin-bottom:4px}
+.unit>h2{margin:0 0 10px;font-size:22px;border-left:4px solid var(--acc);padding-left:12px}
+.lead{color:var(--dim);margin:0 0 14px;font-size:14.5px}
+.unit h3{font-size:16.5px;margin:20px 0 8px}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:13px;margin:16px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:15px 17px;box-shadow:0 1px 2px rgba(15,23,42,.04);transition:.15s}
+.card:hover{border-color:var(--acc);box-shadow:0 4px 14px rgba(37,99,235,.12)}
+.card .icon{font-size:22px}
+.card h4{margin:7px 0 5px;font-size:15.5px;color:var(--acc)}
+.card p{margin:0;color:var(--dim);font-size:13.5px}
+
+.note,.warning{border-radius:8px;padding:12px 16px;margin:14px 0;font-size:14.5px}
+.note{background:var(--accbg);border:1px solid #bfdbfe}
+.warning{background:var(--warnbg);border:1px solid var(--warnline)}
+
+table.data-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px}
+.data-table th{background:var(--accbg);color:#1d4ed8;text-align:left}
+.data-table th,.data-table td{border:1px solid var(--line);padding:8px 13px}
+.data-table tr:nth-child(even) td{background:#fbfdff}
+
+details.faq{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin:9px 0}
+details.faq summary{cursor:pointer;font-weight:600}
+details.faq[open]{border-color:var(--acc)}
+details.faq .answer{color:var(--dim);padding-top:7px}
+
+.shot{border:2px dashed var(--line2);border-radius:8px;padding:26px;text-align:center;color:var(--dim);font-size:14px;margin:13px 0}
+.badge{display:inline-block;border-radius:4px;padding:1px 10px;font-size:12.5px;margin-right:6px;color:var(--acc);border:1px solid var(--acc)}
+.badge.ok{color:var(--ok);border-color:var(--ok)}
+.badge.warn{color:var(--warn);border-color:var(--warn)}
+.empty{border:1px dashed var(--line2);border-radius:10px;padding:44px;text-align:center;color:var(--dim);margin:20px 0}
+
+.foot{border-top:1px solid var(--line);color:var(--dim);text-align:center;padding:20px;font-size:13px;background:var(--bg2)}
+@media (max-width:640px){.hero h1{font-size:26px}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <span class="kind">软件简介</span>
+  <h1>一键解锁 <span class="accent">一条命令 学会所有印痕</span></h1>
+  <p class="sub">玩家聊天输入 /一键解锁，开放分组的印痕一次全部点亮——你勾选分组，它替你把新手教学自动化。</p>
+</header>
+
+<div class="toolbar"><div class="toolbar-in">
+  <input id="searchInput" type="search" placeholder="搜索功能…">
+  <div class="chips">
+    <button class="chip on" data-cat="all">全部</button>
+    <button class="chip" data-cat="core">核心卖点</button>
+    <button class="chip" data-cat="adv">特色功能</button>
+    <button class="chip" data-cat="env">适配与购买</button>
+  </div>
+  <span class="count" id="resultCount"></span>
+</div></div>
+
+<main class="content">
+
+<section class="unit" id="s1" data-cat="core">
+  <div class="group">01 · 软件定位</div>
+  <h2>软件定位</h2>
+  <p>新玩家进服第一件事就是点印痕：几十上百个图纸一个个点过去，点错还要洗点；服主要做「新手送全套印痕」活动，只能手动发物品或改等级曲线，费时还容易出错。「一键解锁」就是冲着这两头难受来的。</p>
+  <p>它是方舟生存进化服务端插件（ArkApi 平台）：玩家在聊天框输入 <code>/一键解锁</code>，服务器开放分组内的印痕立刻全部学会；开放哪些分组由你在配置文件里勾选。一次部署，长期自动营业——你的新手引导成本，从「逐个教」降到「一句话」。</p>
+</section>
+
+<section class="unit" id="s2" data-cat="env">
+  <div class="group">02 · 适配环境</div>
+  <h2>适配环境</h2>
+  <table class="data-table">
+    <tr><th style="width:150px">项目</th><th>要求</th></tr>
+    <tr><td>操作系统</td><td>Windows x64</td></tr>
+    <tr><td>游戏服务端</td><td>ARK: Survival Evolved 专用服务器</td></tr>
+    <tr><td>运行依赖</td><td>ArkApi 3.5 及以上（3.54 与 3.55 服务器均验证通过）；除此之外零依赖——无需数据库、无需额外运行库</td></tr>
+    <tr><td>部署位置</td><td><code>ShooterGame\Binaries\Win64\ArkApi\Plugins\XFunlockEngram\</code>（三个文件放入即用）</td></tr>
+  </table>
+</section>
+
+<div class="card-grid">
+  <div class="unit card" data-cat="core"><div class="icon">🗝️</div><h4>一键解锁印痕</h4><p>玩家一条命令，开放分组印痕全点亮，屏幕即时反馈本次解锁数量。</p></div>
+  <div class="unit card" data-cat="core"><div class="icon">🗂️</div><h4>九大分组自由开关</h4><p>孤岛、焦土、畸变、灭绝、创世、泰克……开放范围你说了算，改配置即时生效。</p></div>
+  <div class="unit card" data-cat="adv"><div class="icon">✏️</div><h4>命令随心改名</h4><p>聊天命令文本在配置里随便改，融入你服务器的命名风格。</p></div>
+  <div class="unit card" data-cat="adv"><div class="icon">🔄</div><h4>三通道热重载</h4><p>聊天、控制台、RCON 都能重载配置，改分组开关不用重启服务器。</p></div>
+  <div class="unit card" data-cat="adv"><div class="icon">🛡️</div><h4>两道安全闸门</h4><p>已学会的不重复发、管理员隐藏的永远不出——测试物品不会借此流出。</p></div>
+  <div class="unit card" data-cat="env"><div class="icon">🖥️</div><h4>新老服务器通吃</h4><p>ArkApi 3.54（GBK）与 3.55（UTF-8）控制台中文都不乱码，自动探测零配置。</p></div>
+</div>
+
+<section class="unit" id="s3" data-cat="core">
+  <div class="group">03 · 重点功能</div>
+  <h2>一键解锁印痕 <span class="badge ok">核心</span></h2>
+  <p><b>什么功能：</b>玩家在聊天框输入 <code>/一键解锁</code>，服务器立即为他解锁所有开放分组内、未隐藏且未学会的印痕，完成时屏幕中央弹出解锁通知——文案、颜色、大小、时长全部可在配置里自定义（按消息独立设置，留空文案即关闭）。</p>
+  <p><b>什么作用：</b>新号开荒直接跳过逐个点印痕的苦差事；想造什么立刻能造，开局体验拉满。</p>
+  <p><b>给你的好处：</b>没有它，你要么眼看玩家被印痕系统劝退，要么搞等级曲线、手动发奖这些重活，还得盯着别发漏发多。有了它，教学这件事一行命令自动搞定——玩家自助、即时生效、数量反馈清清楚楚；你睡觉，它营业。命令可以重复使用（已学会的自动跳过），逢年过节当福利发也不怕刷出问题。</p>
+  <div class="shot">📷 此处应放截图：玩家输入 /一键解锁 后的屏幕通知效果</div>
+</section>
+
+<section class="unit" id="s4" data-cat="core">
+  <div class="group">03 · 重点功能</div>
+  <h2>九大分组开关 <span class="badge">精细控场</span></h2>
+  <p><b>什么功能：</b>配置文件里九个分组开关（孤岛 / 焦土 / 泰克 / 未学习 / 畸变 / 灭绝 / 创世 1 / 创世 2 / Aquatica 水世界），逐组决定哪些印痕参与一键解锁。</p>
+  <p><b>什么作用：</b>想做「本服禁泰克一键」？把 <code>ARK_TEK</code> 设为 <code>false</code> 就行；想开放全图科技？全部设 <code>true</code>。科技节奏完全在你手里。</p>
+  <p><b>给你的好处：</b>不用它，控制科技进度要靠改印痕配置、调等级曲线这些又深又险的活，改错一处全服翻车。用它，改一个 <code>true</code> / <code>false</code>、发一条重载命令就完成调整——活动周开放泰克、活动结束再关上，前后一分钟。再加上「隐藏印痕永不解锁」的内置闸门，你藏起来的测试物品永远安全。</p>
+  <div class="shot">📷 此处应放截图：config.json 分组开关配置示例</div>
+</section>
+
+<section class="unit" id="s5" data-cat="adv">
+  <div class="group">03 · 重点功能</div>
+  <h2>三通道热重载 <span class="badge">免重启</span></h2>
+  <p><b>什么功能：</b>游戏内管理员命令 <code>/XFunlockEngramReload</code>、服务器控制台与 RCON 命令 <code>XFunlockEngram.Reload</code>，三条路都能不重启重新载入配置（默认命令带插件英文名前缀，多插件共存也不会撞名失灵）。</p>
+  <p><b>什么作用：</b>改完分组开关、控制台编码，一条命令立即生效；重载成功失败都有明确反馈，失败原因直接告诉你（通常是 JSON 写错）。</p>
+  <p><b>给你的好处：</b>不用它，每次调配置都要停服重启，在线玩家全部掉线。用它，白天在线高峰期照样调参数——玩家甚至察觉不到你在动配置。重载失败也只影响新配置生效，不会带崩服务器。</p>
+</section>
+
+<section class="unit" id="s6" data-cat="core">
+  <div class="group">04 · 运行效果</div>
+  <h2>运行效果</h2>
+  <div class="shot">📷 此处应放截图：服务器控制台启动横幅「先锋.一键解锁(1.0)…」</div>
+  <div class="shot">📷 此处应放截图：玩家一键解锁完成通知（青色大字）</div>
+  <div class="shot">📷 此处应放截图：解锁前后印痕界面对比</div>
+</section>
+
+<section class="unit" id="s7" data-cat="env">
+  <div class="group">05 · 价格与购买</div>
+  <h2>价格与购买</h2>
+  <div class="note">本插件免费（价格 0，见项目信息）。咨询与获取：作者 QQ 711919　·　先锋方舟服主群 138535385。部署与配置方法见《服主教程》，玩家用法见《玩家教程》。</div>
+</section>
+
+<div class="empty hide" id="emptyState">没有匹配的内容，换个关键词或分类试试</div>
+</main>
+
+<footer class="foot">
+  一键解锁（XFunlockEngram） · 软件简介 · 2026-09
+</footer>
+
+<script>
+(function(){
+var inp=document.getElementById('searchInput');
+var chips=[].slice.call(document.querySelectorAll('.chip'));
+var units=[].slice.call(document.querySelectorAll('.unit'));
+var empty=document.getElementById('emptyState');
+var cnt=document.getElementById('resultCount');
+var cat='all';
+function go(){
+  var q=(inp.value||'').trim().toLowerCase(),n=0;
+  units.forEach(function(u){
+    var okC=(cat=='all'||u.getAttribute('data-cat')==cat);
+    var t=(u.textContent||'').toLowerCase()+(u.getAttribute('data-kw')||'');
+    var okQ=!q||t.indexOf(q)>-1;
+    var s=okC&&okQ;u.classList.toggle('hide',!s);if(s)n++;
+  });
+  empty.classList.toggle('hide',n>0);
+  cnt.textContent=n+' / '+units.length+' 条';
+}
+chips.forEach(function(c){c.addEventListener('click',function(){
+  chips.forEach(function(x){x.classList.remove('on')});c.classList.add('on');
+  cat=c.getAttribute('data-cat');go();
+})});
+inp.addEventListener('input',go);go();
+})();
+</script>
+
+</body>
+</html>
