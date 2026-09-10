@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一键解锁 玩家教程</title>
+<style>
+/* ============================================================
+   样式区：禁止修改！
+   本模板是 xiangmujiaocheng 技能的「玩家教程」专属模板（清爽文档蓝）。
+   修改此区会破坏所有项目玩家教程的视觉统一。
+   ============================================================ */
+:root{--acc:#2563eb;--accbg:#eff6ff;--line:#e2e8f0;--line2:#cbd5e1;--text:#1e293b;--dim:#64748b;--bg2:#f8fafc;--ok:#16a34a;--warn:#d97706;--warnbg:#fffbeb;--warnline:#fde68a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font:15.5px/1.85 "Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;color:var(--text);background:#fff}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+code{background:var(--accbg);color:#1d4ed8;border-radius:4px;padding:1px 7px;font-family:Consolas,"Courier New",monospace;font-size:13.5px}
+pre{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:13px 16px;overflow:auto}
+pre code{background:none;color:#0f172a;padding:0}
+.hide{display:none!important}
+
+.hero{background:linear-gradient(180deg,#eef5ff 0%,#ffffff 100%);border-bottom:1px solid var(--line);padding:36px 20px 26px}
+.hero-in{max-width:1180px;margin:0 auto}
+.kind{display:inline-block;background:var(--acc);color:#fff;border-radius:4px;font-size:13px;padding:2px 12px;letter-spacing:2px}
+.hero h1{margin:12px 0 6px;font-size:30px}
+.hero h1 .accent{color:var(--acc)}
+.hero .sub{color:var(--dim);margin:0;font-size:15px}
+
+.toolbar{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 3px rgba(15,23,42,.05)}
+.toolbar-in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:10px 20px}
+#searchInput{flex:1 1 240px;border:1px solid var(--line2);border-radius:8px;padding:8px 14px;font-size:14.5px;outline:none;background:var(--bg2)}
+#searchInput:focus{border-color:var(--acc);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line2);background:#fff;color:var(--dim);border-radius:999px;padding:5px 15px;font-size:13.5px;cursor:pointer}
+.chip:hover{border-color:var(--acc);color:var(--acc)}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.count{color:var(--dim);font-size:13px;white-space:nowrap}
+
+.layout{max-width:1180px;margin:0 auto;padding:26px 20px 70px;display:flex;gap:36px;align-items:flex-start}
+.toc{flex:0 0 215px;position:sticky;top:66px}
+.toc-title{font-size:12.5px;color:var(--dim);letter-spacing:3px;margin-bottom:8px;padding-left:10px}
+.toc a{display:block;color:var(--dim);padding:6px 10px;border-left:2px solid var(--line);font-size:14px}
+.toc a:hover{color:var(--acc);border-left-color:var(--acc);background:var(--accbg);text-decoration:none}
+.toc a.dim{opacity:.35}
+.content{flex:1 1 500px;min-width:320px}
+
+.unit{margin:0 0 38px}
+.group{font-size:12.5px;color:var(--acc);letter-spacing:2px;margin-bottom:4px}
+.unit>h2{margin:0 0 10px;font-size:22px;border-left:4px solid var(--acc);padding-left:12px}
+.lead{color:var(--dim);margin:0 0 14px;font-size:14.5px}
+.unit h3{font-size:16.5px;margin:20px 0 8px}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:13px;margin:16px 0}
+.card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:15px 17px;box-shadow:0 1px 2px rgba(15,23,42,.04);transition:.15s}
+.card:hover{border-color:var(--acc);box-shadow:0 4px 14px rgba(37,99,235,.12)}
+.card .icon{font-size:22px}
+.card h4{margin:7px 0 5px;font-size:15.5px;color:var(--acc)}
+.card p{margin:0;color:var(--dim);font-size:13.5px}
+
+ol.steps{list-style:none;counter-reset:st;padding:0;margin:8px 0 0}
+ol.steps>li{counter-increment:st;position:relative;padding:0 0 20px 48px}
+ol.steps>li::before{content:counter(st);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--acc);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center;font-size:14px}
+ol.steps>li::after{content:"";position:absolute;left:14px;top:36px;bottom:4px;width:2px;background:var(--line)}
+ol.steps>li:last-child{padding-bottom:2px}
+ol.steps>li:last-child::after{display:none}
+.step-title{display:block;font-weight:700;margin-bottom:3px}
+ol.steps p{margin:0}
+
+.note,.warning{border-radius:8px;padding:12px 16px;margin:14px 0;font-size:14.5px}
+.note{background:var(--accbg);border:1px solid #bfdbfe}
+.warning{background:var(--warnbg);border:1px solid var(--warnline)}
+
+table.data-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14.5px}
+.data-table th{background:var(--accbg);color:#1d4ed8;text-align:left}
+.data-table th,.data-table td{border:1px solid var(--line);padding:8px 13px}
+.data-table tr:nth-child(even) td{background:#fbfdff}
+
+details.faq{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:10px 16px;margin:9px 0}
+details.faq summary{cursor:pointer;font-weight:600}
+details.faq[open]{border-color:var(--acc)}
+details.faq .answer{color:var(--dim);padding-top:7px}
+
+.shot{border:2px dashed var(--line2);border-radius:8px;padding:26px;text-align:center;color:var(--dim);font-size:14px;margin:13px 0}
+.badge{display:inline-block;border-radius:4px;padding:1px 10px;font-size:12.5px;margin-right:6px;color:var(--acc);border:1px solid var(--acc)}
+.badge.ok{color:var(--ok);border-color:var(--ok)}
+.badge.warn{color:var(--warn);border-color:var(--warn)}
+.empty{border:1px dashed var(--line2);border-radius:10px;padding:44px;text-align:center;color:var(--dim);margin:20px 0}
+
+.foot{border-top:1px solid var(--line);color:var(--dim);text-align:center;padding:20px;font-size:13px;background:var(--bg2)}
+@media (max-width:820px){.toc{display:none}.layout{padding-top:18px}.hero h1{font-size:24px}}
+</style>
+</head>
+<body>
+
+<header class="hero"><div class="hero-in">
+  <span class="kind">玩家教程</span>
+  <h1>一键解锁 <span class="accent">玩家指南</span></h1>
+  <p class="sub">一条命令学会服务器开放的全部印痕——怎么用、有什么用、遇到问题怎么办</p>
+</div></header>
+
+<div class="toolbar"><div class="toolbar-in">
+  <input id="searchInput" type="search" placeholder="搜索命令、玩法、问题…">
+  <div class="chips">
+    <button class="chip on" data-cat="all">全部</button>
+    <button class="chip" data-cat="cmd">命令用法</button>
+    <button class="chip" data-cat="rules">玩法说明</button>
+    <button class="chip" data-cat="faq">常见问题</button>
+  </div>
+  <span class="count" id="resultCount"></span>
+</div></div>
+
+<div class="layout">
+<nav class="toc">
+  <div class="toc-title">目录</div>
+  <a href="#w1">功能总览</a>
+  <a href="#w2">怎么用</a>
+  <a href="#w3">命令详解</a>
+  <a href="#w4">常见问题</a>
+  <a href="#w5">获取帮助</a>
+</nav>
+
+<main class="content">
+
+<section class="unit" id="w1" data-cat="rules">
+  <div class="group">第一章 · 功能总览</div>
+  <h2>功能总览</h2>
+  <p class="lead">所有命令都在<b>游戏内聊天框</b>输入。本服务器安装了「一键解锁」插件，提供以下玩家命令：</p>
+  <table class="data-table">
+    <tr><th style="width:170px">命令</th><th>作用</th></tr>
+    <tr><td><code>/一键解锁</code></td><td>一键学会服务器开放分组内的全部印痕（制作图纸立刻全点亮）</td></tr>
+  </table>
+  <div class="note">符号约定：命令格式里的 <code>[方括号]</code> 表示可选参数，只是标注——<b>实际输入时不要输入方括号</b>。本插件的命令没有参数，教程里的示例都是能直接照抄的真实输入。</div>
+  <div class="note">命令名以服务器公告为准：服主可以改命令文本，如果 <code>/一键解锁</code> 没反应，先在群里或公告里确认本服的命令写法。</div>
+  <div class="shot">📷 此处应放截图：聊天框输入 /一键解锁 的效果</div>
+</section>
+
+<section class="unit" id="w2" data-cat="rules">
+  <div class="group">第二章 · 玩法说明</div>
+  <h2>怎么用（从头到尾三步）</h2>
+  <ol class="steps">
+    <li><span class="step-title">打开聊天框</span><p>按平时发消息的方式打开聊天输入框 → 准备输入命令。</p></li>
+    <li><span class="step-title">输入命令并发送</span><p>输入 <code>/一键解锁</code> 并发送 → 服务器立即处理，无需等待读条。</p></li>
+    <li><span class="step-title">查看完成通知</span><p>屏幕中央弹出解锁完成通知（默认青色，显示本次解锁数量）→ 打开印痕 / 制作界面，新图纸已经全部点亮。</p></li>
+  </ol>
+  <div class="note">已学会的印痕不会重复给，所以这条命令可以放心重复使用——它只会补上你还没学的那部分。</div>
+  <div class="warning">死亡、观战等状态下命令没有反应，复活回到角色后再用。部分印痕分组（如泰克科技）是否开放由服主决定，没开就不会包含在内。</div>
+</section>
+
+<section class="unit" id="w3" data-cat="cmd">
+  <div class="group">第三章 · 命令详解</div>
+  <h2>/一键解锁</h2>
+  <p><b>作用：</b>一键学会服务器开放分组内的全部印痕。新号开荒不用再一个个点印痕，输入一次全搞定。</p>
+  <pre><code>/一键解锁</code></pre>
+  <table class="data-table">
+    <tr><th>参数</th><th style="width:60px">必填</th><th>说明</th></tr>
+    <tr><td>（无参数）</td><td>—</td><td>这条命令不需要任何参数，原样输入即可</td></tr>
+  </table>
+  <p>示例：<code>/一键解锁</code>（原样输入：立即解锁，屏幕弹出完成通知）　<code>/kjjs</code>（如果本服把命令改成了 <code>/kjjs</code>，就输入这个，效果完全一样）</p>
+  <p><b>反馈：</b>成功时屏幕中央弹出解锁完成通知，默认文案「一键解锁完成, 本次解锁: N 个印痕」、青色、约 5 秒（具体样式由服主配置，可能被修改或关闭）。如果通知里 N 是 0，说明该学的你之前都学会了。死亡、观战状态下没有任何反应。管理员隐藏的特殊印痕不会通过这条命令发放。</p>
+  <div class="note">命令区分大小写，输入时注意和公告里的写法保持一致。</div>
+</section>
+
+<section class="unit" id="w4" data-cat="faq">
+  <div class="group">第四章 · 常见问题</div>
+  <h2>常见问题</h2>
+  <details class="faq"><summary>输入 /一键解锁 没反应？</summary><div class="answer">先试这个：① 确认命令写法（本服可能改过命令名，看服务器公告）；② 确认自己不在死亡 / 观战状态；③ 注意大小写要和公告一致。还不行就联系服主。</div></details>
+  <details class="faq"><summary>为什么有些图纸没解锁？</summary><div class="answer">先试这个：开放范围由服主按分组控制（比如泰克科技可能没开）；另外你已经学会的、管理员隐藏的图纸都不会重复出现。想确认某个分组开没开，问服主。</div></details>
+  <details class="faq"><summary>这条命令能用几次？</summary><div class="answer">先试这个：随便用。已经学会的印痕会自动跳过，重复使用只补新的，不会出错也不会重复计数。</div></details>
+  <details class="faq"><summary>解锁后在哪里看效果？</summary><div class="answer">先试这个：打开印痕 / 制作界面查看，新学会的图纸已经点亮，可以直接制作对应物品。</div></details>
+  <details class="faq"><summary>通知里「本次解锁: 0 个」是什么意思？</summary><div class="answer">先试这个：说明开放分组里的印痕你之前已经全部学会了，这次没有新的可补——不是出错了。</div></details>
+</section>
+
+<section class="unit" id="w5" data-cat="faq">
+  <div class="group">第五章 · 获取帮助</div>
+  <h2>获取帮助</h2>
+  <div class="note">遇到问题请联系所在服务器的管理员 / 服主反馈，建议附上：你输入的命令原文、屏幕提示截图（或没有反应的现象）、发生时间。服主会根据服务器日志进一步排查。</div>
+</section>
+
+<div class="empty hide" id="emptyState">没有匹配的内容，换个关键词或分类试试</div>
+</main>
+</div>
+
+<footer class="foot">
+  一键解锁（XFunlockEngram） · 玩家教程 · 2026-09
+</footer>
+
+<script>
+(function(){
+var inp=document.getElementById('searchInput');
+var chips=[].slice.call(document.querySelectorAll('.chip'));
+var units=[].slice.call(document.querySelectorAll('.unit'));
+var empty=document.getElementById('emptyState');
+var cnt=document.getElementById('resultCount');
+var cat='all';
+function go(){
+  var q=(inp.value||'').trim().toLowerCase(),n=0;
+  units.forEach(function(u){
+    var okC=(cat=='all'||u.getAttribute('data-cat')==cat);
+    var t=(u.textContent||'').toLowerCase()+(u.getAttribute('data-kw')||'');
+    var okQ=!q||t.indexOf(q)>-1;
+    var s=okC&&okQ;u.classList.toggle('hide',!s);if(s)n++;
+  });
+  [].forEach.call(document.querySelectorAll('.toc a'),function(a){
+    var el=document.getElementById(a.getAttribute('href').slice(1));
+    a.classList.toggle('dim',!(el&&!el.classList.contains('hide')));
+  });
+  empty.classList.toggle('hide',n>0);
+  cnt.textContent=n+' / '+units.length+' 条';
+}
+chips.forEach(function(c){c.addEventListener('click',function(){
+  chips.forEach(function(x){x.classList.remove('on')});c.classList.add('on');
+  cat=c.getAttribute('data-cat');go();
+})});
+inp.addEventListener('input',go);go();
+})();
+</script>
+
+</body>
+</html>
